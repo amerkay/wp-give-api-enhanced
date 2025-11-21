@@ -15,7 +15,7 @@ A WordPress plugin that extends GiveWP with 5x enhanced REST API endpoints provi
 ## Requirements
 
 - WordPress v6.x (tested with version 6.8.3)
-- PHP 8 (tested on version 8.1)
+- PHP 8 (tested on version 8.3)
 - GiveWP plugin v4 (tested with version 4.13.1)
 
 ## Installation
