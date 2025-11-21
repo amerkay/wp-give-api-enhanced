@@ -6,10 +6,10 @@
  * Version: 1.0.0
  * Author: Amer Kawar
  * Author URI: https://wildamer.com
- * License: GPL-2.0+
+ * License: GPLv2
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: givewp-api-enhanced
- * Requires PHP: 7.4
+ * Requires PHP: 8.3
  */
 
 // Exit if accessed directly

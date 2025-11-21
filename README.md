@@ -317,7 +317,7 @@ curl "https://your-site.com/wp-json/give-api-enhanced/v1/donation/123?key=YOUR_P
 
 ## License
 
-GPL-2.0+
+GPLv2. See LICENSE.md.
 
 ## Author
 
