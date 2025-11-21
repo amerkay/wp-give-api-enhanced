@@ -1,8 +1,8 @@
 # GiveWP Enhanced API
 
-A WordPress plugin that extends GiveWP with 5 enhanced REST API endpoints providing complete donation, donor, subscription, campaign, and form data including all custom fields and Gift Aid information.
+A WordPress plugin that extends GiveWP with 5x enhanced REST API endpoints providing complete donation, donor, subscription, campaign, and form data including all custom fields and Gift Aid information.
 
-**Problem this fixes**: The built-in API is too basic to build a proper n8n or Zapier integration. There is currently (Nov 2025) no way to load Gift Aid data or Custom Field (meta data) for donations or donors. That's why I built this plugin.
+**Problem this fixes**: The built-in API is too basic to build a proper n8n or Zapier integration. There is currently (as of Nov 2025) no way to load Gift Aid data or Custom Field (meta data) for donations or donors. That's why I built this plugin.
 
 ## Features
 
@@ -14,9 +14,9 @@ A WordPress plugin that extends GiveWP with 5 enhanced REST API endpoints provid
 
 ## Requirements
 
-- WordPress 4.7+
-- PHP 7.4+
-- GiveWP plugin (active)
+- WordPress v6.x (tested with version 6.8.3)
+- PHP 8 (tested on version 8.1)
+- GiveWP plugin v4 (tested with version 4.13.1)
 
 ## Installation
 
