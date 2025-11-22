@@ -3,13 +3,13 @@
  * Plugin Name: GiveWP Enhanced API
  * Plugin URI: https://github.com/amerkay/wp-give-api-enhanced
  * Description: Adds 5x GiveWP enhanced endpoints with full custom field and Gift Aid data. Uses the same API authentication method from GiveWP -> Tools -> API.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Amer Kawar
  * Author URI: https://wildamer.com
  * License: GPLv2
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: givewp-api-enhanced
- * Requires PHP: 8.3
+ * Requires PHP: 8.0
  */
 
 // Exit if accessed directly
@@ -257,6 +257,7 @@ class GiveWP_Enhanced_API
         $data = $this->convert_model_to_array($donation);
 
         // Add nested relationships
+        $data['meta'] = $this->get_donation_meta($donation_id);
         $data['donor'] = $this->get_donor_data($donation->donorId);
         $data['form'] = $this->get_form_data($donation->formId);
         $data['campaign'] = $this->get_campaign_data($donation->formId);
@@ -343,31 +344,43 @@ class GiveWP_Enhanced_API
     }
 
     /**
+     * Get meta data using GiveWP meta classes
+     *
+     * @param object $meta_db GiveWP meta database object (e.g., Give()->donor_meta, Give()->payment_meta)
+     * @param int $id The ID value
+     * @return array
+     */
+    private function get_give_meta($meta_db, $id)
+    {
+        if (!$meta_db || !method_exists($meta_db, 'get_meta')) {
+            return [];
+        }
+
+        $meta = $meta_db->get_meta($id);
+        if (!is_array($meta)) {
+            return [];
+        }
+
+        // Flatten single-element arrays
+        return array_map(function ($value) {
+            return (is_array($value) && count($value) === 1) ? $value[0] : $value;
+        }, $meta);
+    }
+
+    /**
      * Get all donor meta
      */
     private function get_donor_meta($donor_id)
     {
-        global $wpdb;
+        return $this->get_give_meta(Give()->donor_meta, $donor_id);
+    }
 
-        $meta = $wpdb->get_results(
-            $wpdb->prepare(
-                "SELECT meta_key, meta_value FROM {$wpdb->prefix}give_donormeta WHERE donor_id = %d",
-                $donor_id
-            ),
-            ARRAY_A
-        );
-
-        $result = [];
-        foreach ($meta as $row) {
-            $value = $row['meta_value'];
-            // Unserialize if needed
-            if (is_serialized($value)) {
-                $value = maybe_unserialize($value);
-            }
-            $result[$row['meta_key']] = $value;
-        }
-
-        return $result;
+    /**
+     * Get all donation meta including GA4 UTM values
+     */
+    private function get_donation_meta($donation_id)
+    {
+        return $this->get_give_meta(Give()->payment_meta, $donation_id);
     }
 
     /**
