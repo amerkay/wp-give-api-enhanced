@@ -3,7 +3,7 @@
  * Plugin Name: GiveWP Enhanced API
  * Plugin URI: https://github.com/amerkay/wp-give-api-enhanced
  * Description: Adds 5x GiveWP enhanced endpoints with full custom field and Gift Aid data. Uses the same API authentication method from GiveWP -> Tools -> API.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Amer Kawar
  * Author URI: https://wildamer.com
  * License: GPLv2
